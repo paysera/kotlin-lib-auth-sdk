@@ -1,5 +1,5 @@
 group 'kotlin-lib-auth-sdk'
-version '1.0.1'
+version '1.0-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.2.21'
