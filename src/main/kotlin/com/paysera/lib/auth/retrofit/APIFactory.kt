@@ -14,19 +14,19 @@ class APIFactory() {
         return AuthApiClient(createRetrofitClient(baseUrl))
     }
 
-    private fun createRetrofitClient(baseUrl: String): APIClient {
+    fun createRetrofitClient(baseUrl: String): APIClient {
         return createRetrofit(baseUrl).create(APIClient::class.java)
     }
 
-    private fun createRetrofit(baseUrl: String) = with(Retrofit.Builder()) {
+    fun createRetrofit(baseUrl: String, okHttpClient: OkHttpClient = createOkHttpClient()) = with(Retrofit.Builder()) {
         baseUrl(baseUrl)
         addConverterFactory(createGsonConverterFactory())
         addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-        client(createOkHttpClient())
+        client(okHttpClient)
         build()
     }
 
-    private fun createOkHttpClient() = OkHttpClient().newBuilder().build()
+    fun createOkHttpClient() = OkHttpClient().newBuilder().build()
 
     private fun createGsonConverterFactory(): GsonConverterFactory {
         val gsonBuilder = GsonBuilder()
