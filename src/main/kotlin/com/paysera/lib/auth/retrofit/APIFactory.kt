@@ -8,8 +8,9 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
-class APIFactory() {
+class APIFactory(private val timeout: Long? = null) {
     fun createAuthApiClient(baseUrl: String = "https://auth-api.paysera.com/"): AuthApiClient {
         return AuthApiClient(createRetrofitClient(baseUrl))
     }
@@ -26,7 +27,16 @@ class APIFactory() {
         build()
     }
 
-    fun createOkHttpClient() = OkHttpClient().newBuilder().build()
+    fun createOkHttpClient(): OkHttpClient {
+        return with(OkHttpClient().newBuilder()) {
+            timeout?.let {
+                readTimeout(it, TimeUnit.MILLISECONDS)
+                writeTimeout(it, TimeUnit.MILLISECONDS)
+                connectTimeout(it, TimeUnit.MILLISECONDS)
+            }
+            build()
+        }
+    }
 
     private fun createGsonConverterFactory(): GsonConverterFactory {
         val gsonBuilder = GsonBuilder()
