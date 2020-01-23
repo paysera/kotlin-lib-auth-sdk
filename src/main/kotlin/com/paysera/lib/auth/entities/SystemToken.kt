@@ -1,6 +1,6 @@
 package com.paysera.lib.auth.entities
 
-class SystemToken(
+data class SystemToken(
     val value: String,
     val expiresIn: Int,
     val scope: String,
