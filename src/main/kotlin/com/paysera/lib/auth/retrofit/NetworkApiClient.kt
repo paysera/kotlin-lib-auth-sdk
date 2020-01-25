@@ -2,18 +2,22 @@ package com.paysera.lib.auth.retrofit
 
 import com.paysera.lib.auth.entities.SystemToken
 import com.paysera.lib.auth.entities.requests.CreateSystemTokenOptionalRequest
-import io.reactivex.Single
-import retrofit2.http.*
+import kotlinx.coroutines.Deferred
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.Header
+import retrofit2.http.POST
 
-interface APIClient {
+interface NetworkApiClient {
     @DELETE("authentication/rest/v1/auth-tokens/current")
     fun invalidateAuthToken(
         @Header("Authorization") authorizationHeaderValue: String
-    ): Single<Unit>
+    ): Deferred<Response<Unit>>
 
     @POST("authentication/rest/v1/system-tokens/optional")
     fun createSystemTokenOptional(
         @Header("Authorization") authorizationHeaderValue: String,
         @Body request: CreateSystemTokenOptionalRequest
-    ): Single<SystemToken>
+    ): Deferred<SystemToken>
 }

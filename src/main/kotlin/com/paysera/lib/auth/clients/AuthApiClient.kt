@@ -2,18 +2,24 @@ package com.paysera.lib.auth.clients
 
 import com.paysera.lib.auth.entities.SystemToken
 import com.paysera.lib.auth.entities.requests.CreateSystemTokenOptionalRequest
-import com.paysera.lib.auth.retrofit.APIClient
-import io.reactivex.Single
+import com.paysera.lib.auth.retrofit.NetworkApiClient
+import com.paysera.lib.common.retrofit.ApiRequestManager
+import com.paysera.lib.common.retrofit.BaseApiClient
+import kotlinx.coroutines.Deferred
+import retrofit2.Response
 
-class AuthApiClient(private val apiClient: APIClient) {
+class AuthApiClient(
+    private val apiClient: NetworkApiClient,
+    apiRequestManager: ApiRequestManager
+) : BaseApiClient(apiRequestManager) {
 
-    fun invalidateAuthToken(authToken: String): Single<Unit> {
-        return apiClient.invalidateAuthToken("Bearer ${authToken}")
+    fun invalidateAuthToken(authToken: String): Deferred<Response<Unit>> {
+        return apiClient.invalidateAuthToken("Bearer $authToken")
     }
 
-    fun createSystemTokenOptional(authToken: String, audience: String, scope: String): Single<SystemToken> {
+    fun createSystemTokenOptional(authToken: String, audience: String, scope: String): Deferred<SystemToken> {
         return apiClient.createSystemTokenOptional(
-            "Bearer ${authToken}",
+            "Bearer $authToken",
             CreateSystemTokenOptionalRequest(audience, scope)
         )
     }
