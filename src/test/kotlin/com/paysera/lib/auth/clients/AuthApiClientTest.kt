@@ -1,5 +1,6 @@
 package com.paysera.lib.auth.clients
 
+import com.paysera.lib.auth.entities.requests.CreateSystemTokenOptionalRequest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import runCatchingBlocking
@@ -27,6 +28,25 @@ internal class AuthApiClientTest : BaseTest() {
             "Bearer $testAuthTokenKey",
             testAudience,
             testTokenScopes
+        ).runCatchingBlocking()
+
+        assert(result.isSuccess)
+        assert(result.getOrNull() != null)
+    }
+
+    @Test
+    fun createSystemTokenCollectionOptional() {
+        val testTokenScopes = "logged_in"
+        val testAuthTokenKey = "token_key"
+
+        val requests = listOf(
+            CreateSystemTokenOptionalRequest("audience_1", testTokenScopes),
+            CreateSystemTokenOptionalRequest("audience_2", testTokenScopes)
+        )
+
+        val result = apiClient.createSystemTokenCollectionOptional(
+            "Bearer $testAuthTokenKey",
+            requests
         ).runCatchingBlocking()
 
         assert(result.isSuccess)

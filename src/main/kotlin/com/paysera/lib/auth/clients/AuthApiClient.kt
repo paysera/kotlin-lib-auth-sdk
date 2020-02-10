@@ -23,4 +23,14 @@ class AuthApiClient(
             CreateSystemTokenOptionalRequest(audience, scope)
         )
     }
+
+    fun createSystemTokenCollectionOptional(
+        authToken: String,
+        requests: List<CreateSystemTokenOptionalRequest>
+    ): Deferred<List<SystemToken>> {
+        return apiClient.createSystemTokenCollectionOptional(
+            "Bearer $authToken",
+            requests
+        )
+    }
 }
