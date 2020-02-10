@@ -20,4 +20,10 @@ interface NetworkApiClient {
         @Header("Authorization") authorizationHeaderValue: String,
         @Body request: CreateSystemTokenOptionalRequest
     ): Deferred<SystemToken>
+
+    @POST("authentication/rest/v1/system-tokens/optional-collection")
+    fun createSystemTokenCollectionOptional(
+        @Header("Authorization") authorizationHeaderValue: String,
+        @Body request: List<CreateSystemTokenOptionalRequest>
+    ): Deferred<List<SystemToken>>
 }
