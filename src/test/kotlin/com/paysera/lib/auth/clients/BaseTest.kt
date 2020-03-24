@@ -22,10 +22,6 @@ internal open class BaseTest {
             override fun refreshToken(): Deferred<Any> {
                 return CompletableDeferred(1)
             }
-
-            override fun isRefreshing(): Boolean {
-                return false
-            }
         }
     }
 
