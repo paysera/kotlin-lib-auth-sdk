@@ -15,8 +15,11 @@ class NetworkApiFactory(
     timeout,
     httpLoggingInterceptorLevel
 ) {
-    override fun createClient(baseUrl: String, tokenRefresher: TokenRefresherInterface?): AuthApiClient {
-        createRetrofit(baseUrl, tokenRefresher).apply {
+    override val baseUrl = "https://auth-api.paysera.com/"
+    override val certifiedHosts = listOf("auth-api.paysera.com")
+
+    override fun createClient(tokenRefresher: TokenRefresherInterface?): AuthApiClient {
+        createRetrofit(tokenRefresher).apply {
             return AuthApiClient(
                 retrofit.create(NetworkApiClient::class.java),
                 apiRequestManager
