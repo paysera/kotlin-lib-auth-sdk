@@ -1,6 +1,7 @@
 package com.paysera.lib.auth.retrofit
 
 import com.paysera.lib.auth.clients.AuthApiClient
+import com.paysera.lib.common.interfaces.ErrorLoggerInterface
 import com.paysera.lib.common.interfaces.TokenRefresherInterface
 import com.paysera.lib.common.retrofit.BaseApiFactory
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,12 +9,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 class NetworkApiFactory(
     userAgent: String?,
     timeout: Long? = null,
-    httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC
+    httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
+    errorLogger: ErrorLoggerInterface
 ) : BaseApiFactory<AuthApiClient>(
     userAgent,
     null,
     timeout,
-    httpLoggingInterceptorLevel
+    httpLoggingInterceptorLevel,
+    errorLogger
 ) {
     override val baseUrl = "https://auth-api.paysera.com/"
     override val certifiedHosts = listOf("auth-api.paysera.com")
