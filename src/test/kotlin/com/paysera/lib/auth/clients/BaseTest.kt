@@ -37,10 +37,12 @@ internal open class BaseTest {
     @BeforeAll
     fun setUp() {
         apiClient = NetworkApiFactory(
-            userAgent,
-            timeout,
-            loggingLevel,
-            logger
+            baseUrl = "https://auth-api.paysera.com/",
+            userAgent = userAgent,
+            certifiedHosts = listOf("auth-api.paysera.com"),
+            timeout = timeout,
+            httpLoggingInterceptorLevel = loggingLevel,
+            errorLogger = logger
         ).createClient(tokenRefresher)
     }
 

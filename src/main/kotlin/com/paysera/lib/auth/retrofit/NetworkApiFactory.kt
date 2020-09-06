@@ -7,20 +7,21 @@ import com.paysera.lib.common.retrofit.BaseApiFactory
 import okhttp3.logging.HttpLoggingInterceptor
 
 class NetworkApiFactory(
+    baseUrl: String,
     userAgent: String?,
+    certifiedHosts: List<String> = emptyList(),
     timeout: Long? = null,
     httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
     errorLogger: ErrorLoggerInterface
 ) : BaseApiFactory<AuthApiClient>(
+    baseUrl,
     userAgent,
     null,
+    certifiedHosts,
     timeout,
     httpLoggingInterceptorLevel,
     errorLogger
 ) {
-    override val baseUrl = "https://auth-api.paysera.com/"
-    override val certifiedHosts = listOf("auth-api.paysera.com")
-
     override fun createClient(tokenRefresher: TokenRefresherInterface?): AuthApiClient {
         createRetrofit(tokenRefresher).apply {
             return AuthApiClient(
