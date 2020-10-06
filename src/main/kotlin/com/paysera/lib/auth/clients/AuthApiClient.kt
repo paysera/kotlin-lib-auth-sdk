@@ -36,12 +36,12 @@ class AuthApiClient(
     }
 
     fun createSystemTokenScopeChallenge(
-            authToken: String,
-            identifier: CreateSystemTokenScopeChallengeRequest
+        authToken: String,
+        identifier: CreateSystemTokenScopeChallengeRequest
     ): Deferred<SystemToken> {
         return apiClient.createSystemTokenScopeChallenge(
-                "Bearer $authToken",
-                identifier
+            "Bearer $authToken",
+            identifier
         )
     }
 }
