@@ -60,8 +60,8 @@ internal class AuthApiClientTest : BaseTest() {
         val identifier = "identifier"
 
         val result = apiClient.createSystemTokenScopeChallenge(
-                testAuthTokenKey,
-                CreateSystemTokenScopeChallengeRequest(identifier)
+            testAuthTokenKey,
+            CreateSystemTokenScopeChallengeRequest(identifier)
         ).runCatchingBlocking()
 
         assert(result.isSuccess)
