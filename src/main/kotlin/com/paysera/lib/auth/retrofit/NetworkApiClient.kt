@@ -2,6 +2,7 @@ package com.paysera.lib.auth.retrofit
 
 import com.paysera.lib.auth.entities.SystemToken
 import com.paysera.lib.auth.entities.requests.CreateSystemTokenOptionalRequest
+import com.paysera.lib.auth.entities.requests.CreateSystemTokenScopeChallengeRequest
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
@@ -26,4 +27,10 @@ interface NetworkApiClient {
         @Header("Authorization") authorizationHeaderValue: String,
         @Body request: List<CreateSystemTokenOptionalRequest>
     ): Deferred<List<SystemToken>>
+
+    @POST("authentication/rest/v1/system-tokens/scope-challenge")
+    fun createSystemTokenScopeChallenge(
+        @Header("Authorization") authorizationHeaderValue: String,
+        @Body identifier: CreateSystemTokenScopeChallengeRequest
+    ): Deferred<SystemToken>
 }

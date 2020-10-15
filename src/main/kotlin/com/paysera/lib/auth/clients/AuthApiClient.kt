@@ -2,6 +2,7 @@ package com.paysera.lib.auth.clients
 
 import com.paysera.lib.auth.entities.SystemToken
 import com.paysera.lib.auth.entities.requests.CreateSystemTokenOptionalRequest
+import com.paysera.lib.auth.entities.requests.CreateSystemTokenScopeChallengeRequest
 import com.paysera.lib.auth.retrofit.NetworkApiClient
 import com.paysera.lib.common.retrofit.ApiRequestManager
 import com.paysera.lib.common.retrofit.BaseApiClient
@@ -31,6 +32,16 @@ class AuthApiClient(
         return apiClient.createSystemTokenCollectionOptional(
             "Bearer $authToken",
             requests
+        )
+    }
+
+    fun createSystemTokenScopeChallenge(
+        authToken: String,
+        identifier: CreateSystemTokenScopeChallengeRequest
+    ): Deferred<SystemToken> {
+        return apiClient.createSystemTokenScopeChallenge(
+            "Bearer $authToken",
+            identifier
         )
     }
 }
