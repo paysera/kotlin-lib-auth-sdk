@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 class NetworkApiFactory(
     baseUrl: String,
-    locale: String,
+    locale: String?,
     userAgent: String?,
     certifiedHosts: List<String> = emptyList(),
     timeout: Long? = null,
