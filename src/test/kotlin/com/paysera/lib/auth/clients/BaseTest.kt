@@ -42,7 +42,8 @@ internal open class BaseTest {
             certifiedHosts = listOf("auth-api.paysera.com"),
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
-            errorLogger = logger
+            errorLogger = logger,
+            locale = "en"
         ).createClient(tokenRefresher)
     }
 
