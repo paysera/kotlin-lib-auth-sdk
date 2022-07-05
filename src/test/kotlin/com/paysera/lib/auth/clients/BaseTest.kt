@@ -39,7 +39,6 @@ internal open class BaseTest {
         apiClient = NetworkApiFactory(
             baseUrl = "https://auth-api.paysera.com/",
             userAgent = userAgent,
-            certifiedHosts = listOf("auth-api.paysera.com"),
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
             errorLogger = logger,
