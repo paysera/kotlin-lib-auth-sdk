@@ -42,7 +42,8 @@ internal open class BaseTest {
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
             errorLogger = logger,
-            locale = "en"
+            locale = "en",
+            certificateInterceptor = null
         ).createClient(tokenRefresher)
     }
 
